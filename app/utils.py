@@ -8,7 +8,7 @@ def handle_db_operation(func):
             return func(*args, **kwargs)
         except SQLAlchemyError as e:
             db.session.rollback()
-            return {'error': str(e)}, 500  # Internal Server Error
+            return {'error': str(e)}, 500
         except Exception as e:
-            return {'error': str(e)}, 500  # Internal Server Error
+            return {'error': str(e)}, 500
     return wrapper

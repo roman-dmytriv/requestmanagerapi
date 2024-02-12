@@ -20,10 +20,8 @@ def test_update_request_status(client):
         json={"status": "REJECTED"}, headers={"Operator-ID": str(operator.id)})
 
     print(response.data)
-    # Assert response status code
     assert response.status_code == 200
 
-    # Assert response data
     data = response.json
     assert data['message'] == 'Request status updated successfully'
 

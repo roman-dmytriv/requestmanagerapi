@@ -14,10 +14,8 @@ def test_get_all_requests(client):
     # Make a GET request to fetch all requests
     response = client.get('/api/requests')
 
-    # Assert response status code
     assert response.status_code == 200
 
-    # Assert response data
     data = response.json
     assert len(data) == 2
 
@@ -29,10 +27,8 @@ def test_create_request(client):
 
     print(response.data)
 
-    # Assert response status code
     assert response.status_code == 200
 
-    # Assert response data
     data = response.json
     assert data['message'] == 'Request created successfully'
 
@@ -40,5 +36,3 @@ def test_create_request(client):
     with app.app_context():
         request = Request.query.filter_by(body="Test request").first()
         assert request is not None
-
-# Write similar tests for other methods (PUT, DELETE)
