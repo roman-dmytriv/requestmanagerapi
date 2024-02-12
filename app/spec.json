@@ -1,0 +1,192 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Your API Title",
+      "version": "1.0.0",
+      "description": "Description of your API"
+    },
+    "paths": {
+      "/api/clients": {
+        "get": {
+          "summary": "Get all clients",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Client"
+                    }
+                  }
+                }
+              }
+            },
+            "404": {"description": "No clients found"}
+          }
+        },
+        "post": {
+          "summary": "Create a new client",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {"description": "Client created successfully"},
+            "400": {"description": "Bad request"}
+          }
+        }
+      },
+      "/api/clients/{client_id}": {
+        "get": {
+          "summary": "Get a specific client by ID",
+          "parameters": [
+            {
+              "name": "client_id",
+              "in": "path",
+              "required": true,
+              "schema": {"type": "integer"}
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Client"
+                  }
+                }
+              }
+            },
+            "404": {"description": "Client not found"}
+          }
+        },
+        "put": {
+          "summary": "Update a specific client by ID",
+          "parameters": [
+            {
+              "name": "client_id",
+              "in": "path",
+              "required": true,
+              "schema": {"type": "integer"}
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {"description": "Client updated successfully"},
+            "400": {"description": "Bad request"},
+            "404": {"description": "Client not found"}
+          }
+        },
+        "delete": {
+          "summary": "Delete a specific client by ID",
+          "parameters": [
+            {
+              "name": "client_id",
+              "in": "path",
+              "required": true,
+              "schema": {"type": "integer"}
+            }
+          ],
+          "responses": {
+            "200": {"description": "Client deleted successfully"},
+            "404": {"description": "Client not found"}
+          }
+        }
+      },
+      "/api/operators": {
+        "get": {
+          "summary": "Get all operators",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Operator"
+                    }
+                  }
+                }
+              }
+            },
+            "404": {"description": "No operators found"}
+          }
+        },
+        "post": {
+          "summary": "Create a new operator",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Operator"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {"description": "Operator created successfully"},
+            "400": {"description": "Bad request"}
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Client": {
+          "type": "object",
+          "properties": {
+            "id": {"type": "integer"},
+            "first_name": {"type": "string"},
+            "last_name": {"type": "string"},
+            "phone": {"type": "string"}
+          }
+        },
+        "Operator": {
+          "type": "object",
+          "properties": {
+            "id": {"type": "integer"},
+            "first_name": {"type": "string"},
+            "last_name": {"type": "string"}
+          }
+        },
+        "Request": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "body": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "processed_by": {
+                "type": "integer"
+              }
+            }
+          }
+      }
+    }
+  }
+  
